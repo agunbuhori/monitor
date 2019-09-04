@@ -1,0 +1,60 @@
+
+$orange: #FF7811;
+$white: #FFFFFF;
+$black: #000000;
+$black-table: #131212;;
+$yellow: #ffff00;
+$green: #008000;
+$red: #fd0707;
+$gradient-dark: linear-gradient(to bottom,  #656565 0%, #292929 100%);
+$gradient-light: linear-gradient(to bottom,  #ffffff 0%, #bebebe 100%);
+$gradient-green: linear-gradient(to bottom, #008000 0%, #bebebe 100% );
+
+%bg-orange {
+  background-color: $orange;
+}
+
+%bg-white {
+  background-color: $gradient-light;
+}
+
+%bg-black{
+  background-color: $black; 
+}
+
+@mixin keyframes($animation-name) {
+  @-webkit-keyframes #{$animation-name} {
+    @content;
+  }
+  @-moz-keyframes #{$animation-name} {
+    @content;
+  }  
+  @-ms-keyframes #{$animation-name} {
+    @content;
+  }
+  @-o-keyframes #{$animation-name} {
+    @content;
+  }  
+  @keyframes #{$animation-name} {
+    @content;
+  }
+}
+
+@mixin animation($str) {
+  -webkit-animation: #{$str};
+  -moz-animation: #{$str};
+  -ms-animation: #{$str};
+  -o-animation: #{$str};
+  animation: #{$str};      
+}
+
+@include keyframes(slide-top) {
+  0% { opacity: 1; }
+  90% { opacity: 0; }
+}
+
+@media screen and (max-width: 3072px) and (orientation: potrait){
+	.vehicle-table{
+		height: 100vh;
+	}
+}
