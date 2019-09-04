@@ -18,24 +18,29 @@
                     <table>
                         <thead>
                             <tr style="text-align: left;">
-                                <th colspan="3" v-if="">
-                                    <font-awesome-icon :icon="['fas', 'car']" style="margin-right: 0.5em;"/>MOBIL
+                             <!--    {{ snapshot.titles[$slide] }} -->
+                                <th colspan="3" v-if="snapshot.titles[$slide]  === 0">
+
+                                    <font-awesome-icon :icon="['fas', 'motorcycle']" style="margin-right: 0.5em;"/>MOTORCYCLE AVAILABLE
+                                </th>
+                                 <th colspan="3" v-else-if="snapshot.titles[$slide] === 1">
+                                    <font-awesome-icon :icon="['fas', 'car']" style="margin-right: 0.5em;"/>CAR AVAILABLE
                                 </th>
                             </tr>
                         </thead>
                         <thead>
                             <tr class="bg-white">
-                                <th>NO</th>
-                                <th width="40%">UNIT</th>
-                                <th width="40%">DK</th>
+                                <th width="5%" class="text-center">NO</th>
+                                <th width="60%" class="text-left">UNIT</th>
+                                <th width="35%" class="text-center">DK</th>
                             </tr>
                         </thead>
                         <tbody>
                            <tr v-for="(vehicle, $index) in part" v-bind:key="$index">
                             <td v-if="vehicle.unit" width="5%" class="text-center">{{ (30*$slide)+$index+1 }}</td>
                             <td v-else width="5%" class="text-center">&nbsp;</td>
-                            <td class="text-left">{{ vehicle.unit }}</td>
-                            <td class="text-center">{{ vehicle.number }}</td>
+                            <td class="text-left" height="100%" width="60%" style="width: 60%; height: 100%;">{{ vehicle.unit }}</td>
+                            <td class="text-center" height="100%" width="35%">{{ vehicle.number }}</td>
                           </tr>
                         </tbody>
                     </table>
@@ -86,7 +91,7 @@ export default {
   },
   methods: {
     async fetch() {
-      await this.$axios.$get('monitor')
+      await this.$axios.$get('vehicle')
       .then(response => {
         this.snapshot = response;
         this.renderTable();
@@ -109,24 +114,25 @@ export default {
 <style lang="scss">
 @import "~/assets/scss/main.scss";
 .wrapper {
+    position: fixed;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
     display: grid;
     grid-template-rows: 10em 1fr;
-    background: $black;
 }
 
 .header {
     display: grid;
-    grid-template-rows: 3fr;
+    grid-template-rows: 2fr;
     background-color: $black;
 
     .main-header {
         display: grid;
-        grid-template-columns: 3fr 2fr;
+        grid-template-columns: 2fr 1fr;
         padding: 0 5%;
+        border-bottom: 5px solid $orange;
 
         .left, .right {
             display: flex;
@@ -148,7 +154,7 @@ export default {
         }
 
         .right {
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             justify-content: flex-end;
 
             h3{
@@ -174,79 +180,71 @@ export default {
 }
 
 .content {
-    overflow-x: scroll;
-    width: auto;
-    height: 100%;
+    overflow-y: scroll;
     width: 100%;
+    height: 100%;
 
     .scroll-wrapper{
-        width: 100%;
-        transition: 2s;
+        height: 100% !important;
+        transition: 1s;
 
             .scroll {
                 display: inline-block;
                 float: left;
-                width: 100%;
-                border: 2px solid $white;
+                height: auto !important;
+                border-right: 2px solid $white;
             }
+     }
 
-    }
-
-
-   table {
-        width: 100%;
-        height: 100%;
-        table-layout: fixed;
-        border-collapse: collapse;
-
-
-        thead, tbody tr {
+       table {
             width: 100%;
             height: 100%;
-        }
+            table-layout: fixed;
+            border-collapse: collapse;
 
-        thead {
-            background: $gradient-light;
-            color: $black;
 
-            tr {
-                height: 4em;
+            thead, tbody {
+                width: 100% !important;
+                height: 100% !important;
+            }
 
-                th:not(:first-child) {
-                    border-left: 1px solid $black;
+            thead {
+                background: $gradient-light;
+                color: $black;
+
+                tr {
+                    height: 4em;
+
+                    th:not(:first-child) {
+                        border-left: 1px solid $black;
+                    }
+                }
+
+                &:first-child tr {
+                    background-color: $orange;
                 }
             }
 
-            &:first-child tr {
-                background-color: $orange;
-            }
-        }
+            tbody {
+                color: $white;
+                tr {
+                    &:nth-child(odd) {
+                        background: $gradient-dark;
+                    }
+                    &:nth-child(even) {
+                        background: $black-table;
+                    }
 
-        tbody {
-            color: $white;
-            tr {
-                &:nth-child(odd) {
-                    background: $gradient-dark;
-                }
-                &:nth-child(even) {
-                    background: $black-table;
-                }
-
-                td:not(:first-child) {
-                    border-left: 1px solid white;
+                    td:not(:first-child) {
+                        border-left: 1px solid white;
+                    }
                 }
             }
-        }
 
-        th, td {
-            padding: 0 0.5em;
-            font-size: 17pt;
+            th, td {
+                padding: 0 0.5em;
+                font-size: 20pt;
+            }
         }
-    }
-
-    .separator{
-        width: 2em;
-        background: $black;
-    }
 }
 </style>

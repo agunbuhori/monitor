@@ -305,14 +305,6 @@ export default {
         }
     }
 
-    // @keyframes slide {
-    //     0% {transform: translateX(0)};
-    //     40% {transform: translateX(0)};
-    //     50% {transform: translateX(-50%)};
-    //     90% {transform: translateX(-50%)};
-    //     100% {transform: translateX(0)};
-    // }
-
     table {
         width: 100%;
         height: 100%;
@@ -341,11 +333,7 @@ export default {
 
         tbody {
             color: $white;
-            // display: block;
-            // height: calc(100% - 4em);
-            // overflow-y: scroll;
-            // padding-right: -17px; /* Increase/decrease this value for cross-browser compatibility */
-            // box-sizing: content-box;
+
             tr {
                 &:nth-child(odd) {
                     background: $gradient-dark;

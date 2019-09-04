@@ -59,9 +59,9 @@ export default {
   },
   server: {
     port: 3000, // default: 3000
-    host: '192.168.1.120', // default: localhost
+    host: '0.0.0.0', // default: localhost
   },
   axios: {
-    baseURL:"http://192.168.1.120/yoyaku/public/api/"
+    baseURL:"http://yoyaku.id/public/api/"
   }
 }
